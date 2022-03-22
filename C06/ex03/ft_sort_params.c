@@ -6,7 +6,7 @@
 /*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:24:30 by foctavia          #+#    #+#             */
-/*   Updated: 2022/03/20 17:41:56 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:44:15 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_putstr(char *str)
 	while (str[i])
 	{
 		write (1, &str[i], 1);
-		i++;	
+		i++;
 	}
 }
 
@@ -29,50 +29,51 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	while (s1 && s2)
+	{	
+		if (s1[i] > s2[i])
+			return (0);
+		else if (s1[i] < s2[i])
+			return (1);
+		else if (s1[i] == 0 && s2[i] == 0)
+			return (0);
+		else
+			i++;
+	}
+	return (0);
 }
 
-int	ft_sort_str(int size, char *str[])
+void	ft_swap(char **s1, char **s2)
 {
-	int	i;
-	int	j;
-	int	r;
-	char	*swap[size];
+	char	*swap;
 
-	i = 0;
-	while (i < size - 1)
-	{
-		j = 0;
-		while (j < (size - i - 1))
-		{
-			r = ft_strcmp(str[i], str[i + 1]);
-			if (r > 0)
-			{
-				swap[i] = str[i];
-				str[i] = str[i + 1];
-				str[i + 1] = swap[i];
-			}
-			j++;
-		}
-		i++;		
-	}
+	swap = *s1;
+	*s1 = *s2;
+	*s2 = swap;
 }
 
 int	main(int argc, char *argv[])
 {
-	int i;
+	int	i;
+	int	j;
 
 	i = 1;
-	if (argc < 0)
-		return (0);
-	ft_sort_str(argc - 1, &argv[i]);
-	while (i < argc)
+	while (i < argc - 1)
 	{
-		ft_putstr(argv[i]);
+		j = i + 1;
+		while (j < argc)
+		{
+			if (ft_strcmp(argv[i], argv[j]) == 1)
+				ft_swap(&argv[i], &argv[j]);
+			j++;
+		}
+		i++;
+	}
+	while (argc > 1)
+	{
+		ft_putstr(argv[argc -= 1]);
 		write (1, "\n", 1);
 		i++;
 	}
-	return (1);
+	return (0);
 }

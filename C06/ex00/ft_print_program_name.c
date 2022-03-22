@@ -6,7 +6,7 @@
 /*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:00:06 by foctavia          #+#    #+#             */
-/*   Updated: 2022/03/20 12:05:29 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/03/21 16:44:56 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	ft_putstr(char *str)
 
 int	main(int argc, char *argv[])
 {
-	if (argc < 0)
-		return (0);
+	(void) argc;
 	ft_putstr(argv[0]);
-	return (1);
+	return (0);
 }
