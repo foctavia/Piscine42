@@ -6,7 +6,7 @@
 /*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:51:40 by foctavia          #+#    #+#             */
-/*   Updated: 2022/03/22 18:06:35 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/03/23 19:58:05 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 int	ft_ultimate_range(int **range, int min, int max)
 {
-	int	i;
-	int	*nbr;
+	long int	i;
+	long int	diff;
 
+	diff = (long int) max - min;
 	if (min >= max)
 	{
 		*range = NULL;
 		return (0);
 	}
-	nbr = (int *)malloc(sizeof(int) * (max - min));
-	if (!nbr)
+	*range = malloc(sizeof(int) * (diff));
+	if (!*range)
 		return (-1);
 	i = 0;
-	while (i < (max - min))
+	while (i < diff)
 	{
-		nbr[i] = min + i;
+		(*range)[i] = min + i;
 		i++;
 	}
-	*range = nbr;
 	return (i);
 }

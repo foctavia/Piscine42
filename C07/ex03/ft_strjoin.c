@@ -6,7 +6,7 @@
 /*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 17:56:34 by foctavia          #+#    #+#             */
-/*   Updated: 2022/03/22 11:31:52 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:13:24 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	char	*newstr;
 
 	if (size == 0)
+	{
+		newstr = malloc(0);
 		return (0);
+	}
 	newlen = ft_strlen(sep) * (size - 1);
 	i = 0;
 	while (i < size)

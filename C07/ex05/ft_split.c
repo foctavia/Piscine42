@@ -6,7 +6,7 @@
 /*   By: foctavia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 19:00:21 by foctavia          #+#    #+#             */
-/*   Updated: 2022/03/22 20:31:42 by foctavia         ###   ########.fr       */
+/*   Updated: 2022/03/23 19:16:11 by foctavia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,34 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_strstr(char *str, char *to_find)
+int	find_substr(char *str, char *sep)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	j = 0;
+	nbr = 0;
+	if (str[0] != sep[0])
+		count++;
+	while (str[i])
+	{
+		while (str[i] && str[i] == sep[j])
+		{
+			j++;
+			i++;
+			if ((sep[j] == '\0' && str[i] != '\0')
+				|| (sep[j] == '\0' && sep[0] != str[0]))
+				count++;
+		}
+		i++;
+		j = 0;
+	}
+	return (count);
+}
+
+int	find_post(char *str, char *sep)
 {
 	int	i;
 	int	j;
@@ -31,11 +58,11 @@ int	ft_strstr(char *str, char *to_find)
 	j = 0;
 	while (str[i])
 	{
-		while (str[i + j] && str[i + j] == to_find[j])
+		while (str[i + j] && str[i + j] == sep[j])
 		{
 			j++;
-			if (to_find[j] == '\0')
-				return (i);
+			if (sep[j] == '\0')
+			return (i);
 		}
 		i++;
 		j = 0;
@@ -43,48 +70,43 @@ int	ft_strstr(char *str, char *to_find)
 	return (0);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strcpycat(char *str, char *sep, char *temp)
 {
 	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
-	while(src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	j = 0;
+	k = 0;
+	while (sep[k])
+		temp[i++] = sep[k++];
+	k = 0;
+	while (str[j] && str[j] != sep[k])
+		temp[i++] = str[j++];
+	while (str[j] == sep[k] && str[j + 1] == sep[k + 1])
+		temp[i++] = str[j++];
+	temp[i] = '\0';
+	return (temp);
 }
 
 char	**ft_split(char *str, char *charset)
 {
 	int	i;
 	int	j;
-	int	nbr;
-	int	stridx;
+	int	str_idx;
 	char	temp[ft_strlen(str)];
 	char	**newstr;
 
+	newstr = (char **)malloc(sizeof(char *) * find_substr(str, charset));
 	i = 0;
-	nbr = 0;
-	while (str[i] && (ft_strstr(str[i], charset) != 0))
+	j = 0;
+	str_idx = 0
+	if (str[0] != charset[0])
 	{
-		nbr += 1;
-		i++;
-	}
-	newstr = (char **)malloc(sizeof(char *) * (nbr + 1) + 1);
-	i = 0;
-	stridx = 0;
-	while (str[i])
-	{
-		while (ft_strstr(str[i], charset) != 0)
+		while (str[i])
 		{
-			j = ft_strstr(str[i], charset);
-			stridx = 0;
-			newstr[stridx] = (char *)malloc(sizeof(char) *
-				((2 * ft_strlen(charset)) + j));
-		}
-		i++;
+			temp[j] = str[i]
+		str[str_idx] = (char *)malloc(sizeof(char) *
 	}
 }
